@@ -1,25 +1,25 @@
 
 module.exports = function check(str, bracketsConfig) {
 
-    var arr = [],
-    	result;
+    arr = [];
 
     arr.push(str.charAt(0));
-    // console.log(arr);
 
-    for (var i = 1; i < str.length; i++) {        
+    for (let i = 1; i < str.length; i++) {        
         result = true;
-        for (var symbol of bracketsConfig) {
-            if (arr[arr.length-1] === symbol[0] && str.charAt(i) === symbol[1]) {
+
+        for (let symbol of bracketsConfig) {
+            conditionFirst = arr[arr.length-1] === symbol[0];
+            conditionSecond = str.charAt(i) === symbol[1];
+
+            if (conditionFirst && conditionSecond) {
                 arr.pop();
-                result = false; break;
+                result = false;
             }
         }
 
-        if (result == true) {
-        	arr.push(str.charAt(i));
-        }
-
+        result ? arr.push(str.charAt(i)) : '';
+        
     }
 
     return arr.length === 0;
